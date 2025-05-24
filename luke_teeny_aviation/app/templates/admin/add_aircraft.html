@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add New Aircraft - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_style.css') }}">
+</head>
+<body>
+    <h1>Add New Aircraft</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('admin.add_aircraft') }}">
+        <div>
+            <label for="name">Aircraft Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="airline">Airline:</label>
+            <select id="airline" name="airline_id" required>
+                {% for airline in airlines %}
+                <option value="{{ airline.id }}">{{ airline.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit">Add Aircraft</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Airlines - Luke's Teeny Aviation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Airlines</h1>
+    <ul>
+        {% for airline in airlines %}
+          <li>
+            <a href="{{ url_for('archive.list_aircraft_for_airline', airline_id=airline.id) }}">{{ airline.name }}</a>
+          </li>
+        {% else %}
+          <li>No airlines found.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

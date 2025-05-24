@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add New Registration - Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_style.css') }}">
+</head>
+<body>
+    <h1>Add New Registration</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('admin.add_registration') }}" enctype="multipart/form-data">
+        <div>
+            <label for="registration_code">Registration Code:</label>
+            <input type="text" id="registration_code" name="registration_code" required>
+        </div>
+        <div>
+            <label for="aircraft">Aircraft:</label>
+            <select id="aircraft" name="aircraft_id" required>
+                {% for ac in aircraft_list %}
+                <option value="{{ ac.id }}">{{ ac.name }} ({{ ac.airline.name }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo">
+        </div>
+        <div>
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes"></textarea>
+        </div>
+        <div>
+            <button type="submit">Add Registration</button>
+        </div>
+    </form>
+</body>
+</html>

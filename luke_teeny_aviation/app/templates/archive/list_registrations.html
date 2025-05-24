@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{ aircraft.name }} Registrations - Luke's Teeny Aviation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>{{ aircraft.name }} Registrations</h1>
+    <p>Airline: {{ aircraft.airline.name }}</p>
+    <p><a href="{{ url_for('archive.list_aircraft_for_airline', airline_id=aircraft.airline_id) }}">Back to {{ aircraft.airline.name }} Aircraft</a></p>
+    
+    {% if registrations %}
+        {% for reg in registrations %}
+          <div class="registration-details">
+            <h3>{{ reg.registration_code }}</h3>
+            {% if reg.photo_filename %}
+              <img src="{{ url_for('archive.uploaded_file', filename=reg.photo_filename) }}" alt="{{ reg.registration_code }}" class="thumbnail">
+            {% else %}
+              <p>No photo available.</p>
+            {% endif %}
+            {% if reg.notes %}
+              <p class="notes">Notes: {{ reg.notes }}</p>
+            {% endif %}
+          </div>
+          <hr>
+        {% endfor %}
+    {% else %}
+      <p>No registrations found for this aircraft.</p>
+    {% endif %}
+</body>
+</html>
