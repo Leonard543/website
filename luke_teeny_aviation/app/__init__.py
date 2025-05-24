@@ -23,7 +23,8 @@ def create_app():
         db.create_all()
 
     # Register Blueprints
-    from .routes import admin_bp, archive_bp # Import archive_bp
+    from .routes import main_bp, admin_bp, archive_bp # Import archive_bp
+    app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(archive_bp) # Register archive_bp
 

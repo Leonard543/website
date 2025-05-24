@@ -4,6 +4,12 @@ from werkzeug.utils import secure_filename
 from .models import db, Airline, Aircraft, Registration
 from flask import abort, send_from_directory
 
+main_bp = Blueprint('main', __name__)
+
+@main_bp.route('/')
+def index():
+    return render_template('index.html')
+
 admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin_bp.route('/add_airline', methods=['GET', 'POST'])
